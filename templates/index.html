@@ -19,6 +19,7 @@
             justify-content: center;
             align-items: center;
             color: #333;
+            padding: 20px;
         }
 
         .container {
@@ -26,10 +27,10 @@
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 1200px;
-            width: 90%;
+            max-width: 1400px;
+            width: 100%;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.2fr 1fr 1fr;
             gap: 30px;
         }
 
@@ -46,6 +47,12 @@
             font-size: 2.5em;
         }
 
+        h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
         .cookie-display {
             font-size: 4em;
             margin: 20px 0;
@@ -57,8 +64,8 @@
         }
 
         .stats {
-            font-size: 1.2em;
-            margin: 15px 0;
+            font-size: 1.1em;
+            margin: 10px 0;
             color: #666;
         }
 
@@ -79,6 +86,7 @@
             box-shadow: 0 10px 30px rgba(255, 140, 66, 0.4);
             position: relative;
             overflow: hidden;
+            margin: 20px 0;
         }
 
         .cookie-btn:hover {
@@ -99,31 +107,41 @@
                 transform: scale(1) rotate(0deg);
             }
             50% {
-                transform: scale(1.2) rotate(15deg);
+                transform: scale(1.3) rotate(20deg);
             }
             100% {
                 transform: scale(0.95) rotate(0deg);
             }
         }
 
-        .upgrade-section {
+        .upgrades-section, .achievements-section {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
         }
 
-        .upgrades-title {
-            font-size: 1.8em;
-            color: #667eea;
-            margin-bottom: 20px;
-            text-align: center;
+        .upgrades-section::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .upgrades-section::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .upgrades-section::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
         }
 
         .upgrade-item {
             background: #f8f9fa;
             border: 2px solid #e9ecef;
             border-radius: 10px;
-            padding: 15px;
+            padding: 12px;
             transition: all 0.3s;
             cursor: pointer;
         }
@@ -148,16 +166,16 @@
             box-shadow: 0 0 20px rgba(255, 165, 0, 0.5);
         }
 
-        .upgrade-name {
-            font-weight: bold;
-            font-size: 1.1em;
-            color: #333;
+        .upgrade-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .upgrade-cost {
-            color: #999;
-            font-size: 0.9em;
-            margin-top: 5px;
+        .upgrade-name {
+            font-weight: bold;
+            font-size: 1em;
+            color: #333;
         }
 
         .upgrade-count {
@@ -167,19 +185,31 @@
             padding: 2px 8px;
             font-size: 0.8em;
             display: inline-block;
-            margin-left: 10px;
+        }
+
+        .upgrade-cost {
+            color: #999;
+            font-size: 0.85em;
+            margin-top: 4px;
+        }
+
+        .upgrade-info {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 4px;
         }
 
         button {
-            padding: 10px 20px;
+            padding: 8px 15px;
             background: #667eea;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 1em;
+            font-size: 0.9em;
             transition: all 0.3s;
-            margin-top: 10px;
+            margin-top: 8px;
+            width: 100%;
         }
 
         button:hover {
@@ -204,6 +234,7 @@
             font-weight: bold;
             animation: slideIn 0.3s ease-out, slideOut 2.7s ease-in 0.3s forwards;
             z-index: 1000;
+            max-width: 300px;
         }
 
         @keyframes slideIn {
@@ -228,54 +259,46 @@
             }
         }
 
-        .cps-display {
+        .cps-display, .multiplier-display, .click-count {
             background: #e9ecef;
             padding: 10px 15px;
             border-radius: 8px;
-            margin: 10px 0;
-            color: #495057;
+            margin: 8px 0;
+            font-size: 1em;
         }
 
         .multiplier-display {
             background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin: 10px 0;
         }
 
-        .lucky-67-badge {
-            display: inline-block;
-            background: linear-gradient(45deg, #ffa500, #ff6b6b);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8em;
+        .achievement {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
             font-weight: bold;
-            animation: pulse 1s infinite;
+            cursor: help;
+            transition: transform 0.3s;
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
+        .achievement:hover {
+            transform: scale(1.1);
         }
 
-        .click-count {
-            background: #e9ecef;
-            padding: 10px 15px;
-            border-radius: 8px;
-            color: #666;
-            margin: 10px 0;
+        .achievement-icon {
+            font-size: 1.8em;
+            display: block;
         }
 
-        @media (max-width: 900px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
+        .achievement-name {
+            font-size: 0.8em;
+            margin-top: 4px;
+        }
+
+        .locked-achievement {
+            opacity: 0.3;
+            background: #ccc;
         }
 
         .reset-btn {
@@ -287,95 +310,233 @@
         .reset-btn:hover {
             background: #ff5252;
         }
+
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .cookie-btn {
+                width: 150px;
+                height: 150px;
+                font-size: 60px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+
+        .info-box {
+            background: #f0f3ff;
+            border: 1px solid #667eea;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Clicker Section -->
         <div class="clicker-section">
-            <h1>🍪 Cookie Clicker</h1>
+            <h1>🍪 Cookie Clicker 67</h1>
             <div class="cookie-display" id="cookieDisplay">0</div>
-            <div class="stats">
-                <div><span class="label">Click #:</span> <span id="clickCount">0</span></div>
-            </div>
+            
             <div class="cps-display" id="cpsDisplay">
-                <span class="label">Koekjes per seconde:</span> <span id="cps">1</span>
+                <span class="label">📈 Cookies/sec:</span> <span id="cps">0</span>
             </div>
+            
             <div class="multiplier-display" id="multiplierDisplay" style="display: none;">
                 🚀 Multiplier: <span id="multiplier">1</span>x
             </div>
+            
+            <div class="click-count">
+                Click #: <span id="clickCount">0</span>
+            </div>
+
             <button class="cookie-btn" id="cookieBtn">🍪</button>
+            
+            <div class="info-box">
+                💡 Koop upgrades voor passieve inkomsten! Elke 67de klik = 67x bonus als Lucky 67 geactiveerd is!
+            </div>
         </div>
 
-        <div class="upgrade-section">
-            <h2 class="upgrades-title">⬆️ Upgrades</h2>
-
-            <div class="upgrade-item" id="grandmaUpgrade">
-                <div>
-                    <span class="upgrade-name">👵 Grandma</span>
-                    <span class="upgrade-count" id="grandmaCount">0</span>
-                </div>
-                <div class="upgrade-cost">Kost: 15 koekjes | Voegt 1 CPS toe</div>
-                <button onclick="buyUpgrade('grandma')" id="buyGrandma">Kopen</button>
+        <!-- Upgrades Section -->
+        <div>
+            <h2>⬆️ Upgrades</h2>
+            <div class="upgrades-section" id="upgradesContainer">
+                <!-- Dynamically generated -->
             </div>
-
-            <div class="upgrade-item" id="robotUpgrade">
-                <div>
-                    <span class="upgrade-name">🤖 Robot Baker</span>
-                    <span class="upgrade-count" id="robotCount">0</span>
-                </div>
-                <div class="upgrade-cost">Kost: 100 koekjes | Voegt 5 CPS toe</div>
-                <button onclick="buyUpgrade('robot')" id="buyRobot">Kopen</button>
-            </div>
-
-            <div class="upgrade-item lucky-67" id="lucky67Upgrade" style="display: none;">
-                <div>
-                    <span class="upgrade-name">✨ Lucky 67 Power</span>
-                </div>
-                <div class="upgrade-cost">Kost: 67 koekjes | Elke 67de klik geeft 67x bonus!</div>
-                <button onclick="buyUpgrade('lucky_67')" id="buyLucky67">Ontgrendelen! 🎉</button>
-            </div>
-
-            <div class="upgrade-item" id="goldenCookieUpgrade" style="display: none;">
-                <div>
-                    <span class="upgrade-name">⭐ Gouden Koekje</span>
-                </div>
-                <div class="upgrade-cost">Kost: 500 koekjes | Multiplier: 1.3x</div>
-                <button onclick="buyUpgrade('golden_cookie')" id="buyGoldenCookie">Kopen</button>
-            </div>
-
             <button class="reset-btn" onclick="resetGame()">🔄 Reset Game</button>
+        </div>
+
+        <!-- Achievements Section -->
+        <div>
+            <h2>🏆 Achievements</h2>
+            <div class="achievements-section" id="achievementsContainer">
+                <!-- Dynamically generated -->
+            </div>
         </div>
     </div>
 
     <script>
+        const UPGRADE_CONFIGS = {
+            'grandma': {
+                name: '👵 Grandma',
+                description: '+1 CPS',
+                rarity: 'common',
+            },
+            'robot': {
+                name: '🤖 Robot Baker',
+                description: '+5 CPS',
+                rarity: 'uncommon',
+            },
+            'factory': {
+                name: '🏭 Factory',
+                description: '+20 CPS',
+                rarity: 'rare',
+            },
+            'alien': {
+                name: '👽 Alien',
+                description: '+100 CPS',
+                rarity: 'legendary',
+            },
+            'lucky_67': {
+                name: '✨ Lucky 67 Power',
+                description: 'Every 67th click = 67x bonus!',
+                rarity: 'legendary',
+            },
+            'golden_cookie': {
+                name: '⭐ Golden Cookie',
+                description: '1.3x Multiplier',
+                rarity: 'epic',
+            },
+            'multiplier_x2': {
+                name: '💎 Double Power',
+                description: '2x Multiplier',
+                rarity: 'legendary',
+            },
+        };
+
         const state = {
             cookies: 0,
             clicks: 0,
-            cps: 1,
+            cps: 0,
             multiplier: 1,
             upgrades: {},
             lucky_67_active: false,
+            achievements: [],
+            upgrade_costs: {},
+            upgrade_values: {},
         };
 
         const updateDisplay = () => {
-            document.getElementById('cookieDisplay').textContent = Math.floor(state.cookies);
+            const formatNumber = (n) => {
+                if (n >= 1e9) return (n / 1e9).toFixed(2) + 'B';
+                if (n >= 1e6) return (n / 1e6).toFixed(2) + 'M';
+                if (n >= 1e3) return (n / 1e3).toFixed(2) + 'K';
+                return Math.floor(n).toString();
+            };
+
+            document.getElementById('cookieDisplay').textContent = formatNumber(state.cookies);
             document.getElementById('clickCount').textContent = state.clicks;
-            document.getElementById('cps').textContent = state.cps;
+            document.getElementById('cps').textContent = state.cps.toFixed(1);
             document.getElementById('multiplier').textContent = state.multiplier.toFixed(2);
 
+            // Show multiplier display only if multiplier > 1
             if (state.multiplier > 1) {
                 document.getElementById('multiplierDisplay').style.display = 'block';
+            } else {
+                document.getElementById('multiplierDisplay').style.display = 'none';
             }
 
-            // Update upgrade buttons
-            document.getElementById('buyGrandma').disabled = state.cookies < 15;
-            document.getElementById('buyRobot').disabled = state.cookies < 100;
-            document.getElementById('buyLucky67').disabled = state.cookies < 67;
-            document.getElementById('buyGoldenCookie').disabled = state.cookies < 500;
+            updateUpgradeButtons();
+        };
 
-            // Update counts
-            document.getElementById('grandmaCount').textContent = state.upgrades.grandma || 0;
-            document.getElementById('robotCount').textContent = state.upgrades.robot || 0;
+        const updateUpgradeButtons = () => {
+            for (const [upgrade, config] of Object.entries(UPGRADE_CONFIGS)) {
+                const btn = document.getElementById(`buy${upgrade.charAt(0).toUpperCase() + upgrade.slice(1)}`);
+                if (btn) {
+                    const cost = state.upgrade_costs[upgrade] || 0;
+                    btn.disabled = state.cookies < cost;
+                }
+            }
+        };
+
+        const renderUpgrades = () => {
+            const container = document.getElementById('upgradesContainer');
+            container.innerHTML = '';
+
+            const upgrades = [
+                ['grandma', 'robot', 'factory', 'alien', 'lucky_67', 'golden_cookie', 'multiplier_x2']
+            ];
+
+            upgrades[0].forEach(upgrade => {
+                const config = UPGRADE_CONFIGS[upgrade];
+                const cost = state.upgrade_costs[upgrade] || 0;
+                const count = state.upgrades[upgrade] || 0;
+                const isSinglePurchase = ['lucky_67', 'golden_cookie', 'multiplier_x2'].includes(upgrade);
+                const isPurchased = isSinglePurchase && count > 0;
+
+                const div = document.createElement('div');
+                div.className = `upgrade-item ${upgrade === 'lucky_67' ? 'lucky-67' : ''}`;
+                
+                // Show Lucky 67 only after 67 cookies are reached
+                if (upgrade === 'lucky_67' && state.cookies < 67) {
+                    div.style.display = 'none';
+                } else {
+                    div.style.display = 'block';
+                }
+
+                // Show Golden Cookie only after lucky_67 is purchased
+                if (upgrade === 'golden_cookie' && !state.upgrades.lucky_67) {
+                    div.style.display = 'none';
+                } else if (upgrade === 'golden_cookie') {
+                    div.style.display = 'block';
+                }
+
+                div.innerHTML = `
+                    <div class="upgrade-header">
+                        <span class="upgrade-name">${config.name}</span>
+                        ${!isSinglePurchase && count > 0 ? `<span class="upgrade-count">${count}</span>` : ''}
+                    </div>
+                    <div class="upgrade-info">${config.description}</div>
+                    <div class="upgrade-cost">Cost: ${cost} cookies</div>
+                    <button onclick="buyUpgrade('${upgrade}')" id="buy${upgrade.charAt(0).toUpperCase() + upgrade.slice(1)}" 
+                        ${isPurchased ? 'disabled' : ''}>
+                        ${isPurchased ? '✅ Owned' : 'Buy'}
+                    </button>
+                `;
+                container.appendChild(div);
+            });
+        };
+
+        const renderAchievements = async () => {
+            const response = await fetch('/api/achievements');
+            const data = await response.json();
+            const container = document.getElementById('achievementsContainer');
+            container.innerHTML = '';
+
+            for (const [key, achievement] of Object.entries(data.all_achievements)) {
+                const isUnlocked = data.unlocked.includes(key);
+                const div = document.createElement('div');
+                div.className = `achievement ${!isUnlocked ? 'locked-achievement' : ''}`;
+                div.title = `${achievement.name} - ${achievement.icon}`;
+                div.innerHTML = `
+                    <span class="achievement-icon">${achievement.icon}</span>
+                    <div class="achievement-name">${achievement.name}</div>
+                `;
+                container.appendChild(div);
+            }
         };
 
         const loadState = async () => {
@@ -383,6 +544,8 @@
             const data = await response.json();
             Object.assign(state, data);
             updateDisplay();
+            renderUpgrades();
+            renderAchievements();
         };
 
         const click = async () => {
@@ -395,6 +558,8 @@
 
             state.cookies = data.cookies;
             state.clicks = data.clicks;
+            state.cps = data.cps;
+            state.multiplier = data.multiplier;
             updateDisplay();
 
             // Lucky 67 effect
@@ -402,13 +567,22 @@
                 const btn = document.getElementById('cookieBtn');
                 btn.classList.add('lucky-67-effect');
                 setTimeout(() => btn.classList.remove('lucky-67-effect'), 600);
-                showNotification(`🎉 LUCKY 67! +${Math.floor(data.cookies_earned)} koekjes!`);
+                showNotification(`🎉 LUCKY 67! +${Math.floor(data.cookies_earned)} cookies!`);
+            } else if (data.is_lucky_67) {
+                showNotification(`🍀 Click #67 reached! Unlock Lucky 67!`);
             }
 
             // Unlock Lucky 67
             if (data.lucky_67_unlocked) {
-                document.getElementById('lucky67Upgrade').style.display = 'block';
-                showNotification('✨ Lucky 67 Power ontgrendeld!');
+                renderUpgrades();
+                showNotification('✨ Lucky 67 Power unlocked!');
+            }
+
+            // Achievements
+            if (data.new_achievements && data.new_achievements.length > 0) {
+                data.new_achievements.forEach(ach => {
+                    renderAchievements();
+                });
             }
         };
 
@@ -426,15 +600,15 @@
             }
 
             const data = await response.json();
-            Object.assign(state, data);
+            state.cookies = data.cookies;
+            state.cps = data.cps;
+            state.multiplier = data.multiplier;
+            state.upgrades = data.upgrades;
             updateDisplay();
+            renderUpgrades();
+            renderAchievements();
 
-            if (upgrade === 'lucky_67') {
-                showNotification('🎊 Lucky 67 Power geactiveerd!');
-                document.getElementById('goldenCookieUpgrade').style.display = 'block';
-            } else {
-                showNotification(`✅ ${upgrade} gekocht!`);
-            }
+            showNotification(`✅ ${UPGRADE_CONFIGS[upgrade].name} bought!`);
         };
 
         const showNotification = (message) => {
@@ -451,14 +625,12 @@
             }
         };
 
-        // Add passive event listener for better performance
-        document.getElementById('cookieBtn').addEventListener('click', click, { passive: true });
+        // Event listeners
+        document.getElementById('cookieBtn').addEventListener('click', click);
 
-        // Load initial state
+        // Load initial state and refresh data
         loadState();
-
-        // Auto-save every 5 seconds (optional, for persistence)
-        setInterval(loadState, 5000);
+        setInterval(loadState, 1000);
     </script>
 </body>
 </html>
