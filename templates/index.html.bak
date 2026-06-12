@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍪 Cookie Clicker 67 🍪</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            padding: 20px;
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 1600px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            gap: 30px;
+        }
+
+        .top-bar {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .player-info-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .player-profile {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .player-emoji {
+            font-size: 1.5em;
+        }
+
+        .rank-badge {
+            background: #ffa500;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .set-player-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .set-player-btn:hover {
+            background: #5568d3;
+        }
+
+        .clicker-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .cookie-display {
+            font-size: 4em;
+            margin: 20px 0;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats {
+            font-size: 1.1em;
+            margin: 10px 0;
+            color: #666;
+        }
+
+        .stats .label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .cookie-btn {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: none;
+            background: radial-gradient(circle at 30% 30%, #ffb366, #ff8c42);
+            cursor: pointer;
+            font-size: 80px;
+            transition: all 0.1s;
+            box-shadow: 0 10px 30px rgba(255, 140, 66, 0.4);
+            position: relative;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .cookie-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 140, 66, 0.6);
+        }
+
+        .cookie-btn:active {
+            transform: scale(0.95);
+        }
+
+        .lucky-67-effect {
+            animation: lucky67 0.6s ease-out;
+        }
+
+        @keyframes lucky67 {
+            0% {
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                transform: scale(1.3) rotate(20deg);
+            }
+            100% {
+                transform: scale(0.95) rotate(0deg);
+            }
+        }
+
+        .upgrades-section, .achievements-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .upgrades-section::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .upgrades-section::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .upgrades-section::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+
+        .upgrade-item {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .upgrade-item:hover:not(:disabled) {
+            border-color: #667eea;
+            background: #f0f3ff;
+            transform: translateX(5px);
+        }
+
+        .upgrade-item:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .upgrade-item.lucky-67 {
+            border: 3px solid #ffa500;
+            background: linear-gradient(135deg, #fff9e6, #ffe6cc);
+        }
+
+        .upgrade-item.lucky-67:hover:not(:disabled) {
+            box-shadow: 0 0 20px rgba(255, 165, 0, 0.5);
+        }
+
+        .upgrade-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .upgrade-name {
+            font-weight: bold;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .upgrade-count {
+            background: #667eea;
+            color: white;
+            border-radius: 20px;
+            padding: 2px 8px;
+            font-size: 0.8em;
+            display: inline-block;
+        }
+
+        .upgrade-cost {
+            color: #999;
+            font-size: 0.85em;
+            margin-top: 4px;
+        }
+
+        .upgrade-info {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        button {
+            padding: 8px 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            margin-top: 8px;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ffa500;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            animation: slideIn 0.3s ease-out, slideOut 2.7s ease-in 0.3s forwards;
+            z-index: 1000;
+            max-width: 300px;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        .cps-display, .multiplier-display, .click-count {
+            background: #e9ecef;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 8px 0;
+            font-size: 1em;
+        }
+
+        .multiplier-display {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .achievement {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            cursor: help;
+            transition: transform 0.3s;
+        }
+
+        .achievement:hover {
+            transform: scale(1.1);
+        }
+
+        .achievement-icon {
+            font-size: 1.8em;
+            display: block;
+        }
+
+        .achievement-name {
+            font-size: 0.8em;
+            margin-top: 4px;
+        }
+
+        .locked-achievement {
+            opacity: 0.3;
+            background: #ccc;
+        }
+
+        .reset-btn {
+            background: #ff6b6b;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .reset-btn:hover {
+            background: #ff5252;
+        }
+
+        .leaderboard-container {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .leaderboard-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            border-radius: 8px 8px 0 0;
+            font-weight: bold;
+        }
+
+        .leaderboard-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .leaderboard-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .leaderboard-rank {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .rank-1 { color: #ffd700; font-weight: bold; }
+        .rank-2 { color: #c0c0c0; font-weight: bold; }
+        .rank-3 { color: #cd7f32; font-weight: bold; }
+
+        .leaderboard-player {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+        }
+
+        .leaderboard-emoji {
+            font-size: 1.3em;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .stat-label {
+            color: #999;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            color: #333;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .milestone-section {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .milestone {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .milestone-icon {
+            font-size: 2em;
+        }
+
+        .milestone-text {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .save-score-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .save-score-modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .emoji-selector {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .emoji-btn {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.3em;
+            transition: all 0.3s;
+        }
+
+        .emoji-btn:hover, .emoji-btn.selected {
+            border-color: #667eea;
+            background: #f0f3ff;
+            transform: scale(1.1);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-buttons button {
+            flex: 1;
+            margin: 0;
+        }
+
+        .modal-buttons button.cancel {
+            background: #999;
+        }
+
+        .modal-buttons button.cancel:hover {
+            background: #777;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .cookie-btn {
+                width: 150px;
+                height: 150px;
+                font-size: 60px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .leaderboard-table {
+                font-size: 0.9em;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-box {
+            background: #f0f3ff;
+            border: 1px solid #667eea;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-wrapper">
+        <!-- Top Bar with Player Info -->
+        <div class="top-bar" id="topBar">
+            <div class="player-info-section">
+                <div class="player-profile" id="playerProfile">
+                    <span class="player-emoji" id="playerEmoji">🎮</span>
+                    <span id="playerName">Anonymous Player</span>
+                </div>
+                <div class="rank-badge" id="rankBadge">Rank: #-</div>
+            </div>
+            <button class="set-player-btn" onclick="openPlayerModal()">👤 Set Profile</button>
+            <button class="set-player-btn" onclick="openLeaderboardTab()" style="background: #ffa500;">🏆 Leaderboard</button>
+        </div>
+
+        <!-- Leaderboard Section -->
+        <div class="leaderboard-container" id="leaderboardContainer" style="display: none;">
+            <h2>🏆 Top Players</h2>
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Cookies</th>
+                        <th>Clicks</th>
+                        <th>CPS</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboardBody">
+                    <!-- Dynamically generated -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Milestones Section -->
+        <div class="milestone-section" id="milestoneContainer" style="display: none;">
+            <h2>🎯 Milestones</h2>
+            <div id="milestonesDiv">
+                <!-- Dynamically generated -->
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Clicker Section -->
+            <div class="clicker-section">
+                <h1>🍪 Cookie Clicker 67</h1>
+                <div class="cookie-display" id="cookieDisplay">0</div>
+                
+                <div class="cps-display" id="cpsDisplay">
+                    <span class="label">📈 Cookies/sec:</span> <span id="cps">0</span>
+                </div>
+                
+                <div class="multiplier-display" id="multiplierDisplay" style="display: none;">
+                    🚀 Multiplier: <span id="multiplier">1</span>x
+                </div>
+                
+                <div class="click-count">
+                    Click #: <span id="clickCount">0</span>
+                </div>
+
+                <button class="cookie-btn" id="cookieBtn">🍪</button>
+                
+                <div class="info-box">
+                    💡 Koop upgrades voor passieve inkomsten! Elke 67de klik = 67x bonus als Lucky 67 geactiveerd is!
+                </div>
+            </div>
+
+            <!-- Upgrades Section -->
+            <div>
+                <h2>⬆️ Upgrades</h2>
+                <div class="upgrades-section" id="upgradesContainer">
+                    <!-- Dynamically generated -->
+                </div>
+                <button class="reset-btn" onclick="resetGame()">🔄 Reset Game</button>
+            </div>
+
+            <!-- Achievements Section -->
+            <div>
+                <h2>🏆 Achievements</h2>
+                <div class="achievements-section" id="achievementsContainer">
+                    <!-- Dynamically generated -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="leaderboard-container" id="statsContainer" style="display: none;">
+            <h2>📊 Your Stats</h2>
+            <div class="stats-grid" id="statsGrid">
+                <!-- Dynamically generated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Player Profile Modal -->
+    <div class="save-score-modal" id="playerModal">
+        <div class="modal-content">
+            <h3>🎮 Set Your Profile</h3>
+            <input type="text" class="modal-input" id="playerNameInput" placeholder="Enter your name" maxlength="20">
+            <p style="font-size: 0.9em; color: #666; margin-bottom: 10px;">Choose your emoji:</p>
+            <div class="emoji-selector" id="emojiSelector">
+                <!-- Dynamically generated -->
+            </div>
+            <div class="modal-buttons">
+                <button onclick="closePlayerModal()" class="cancel">Cancel</button>
+                <button onclick="savePlayerProfile()">Save Profile</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const EMOJIS = ['🎮', '🍪', '👾', '🌟', '🚀', '💎', '⚡', '🔥', '🌈', '👑', '🎯', '💡'];
+
+        const UPGRADE_CONFIGS = {
+            'grandma': {
+                name: '👵 Grandma',
+                description: '+1 CPS',
+                rarity: 'common',
+            },
+            'robot': {
+                name: '🤖 Robot Baker',
+                description: '+5 CPS',
+                rarity: 'uncommon',
+            },
+            'factory': {
+                name: '🏭 Factory',
+                description: '+20 CPS',
+                rarity: 'rare',
+            },
+            'alien': {
+                name: '👽 Alien',
+                description: '+100 CPS',
+                rarity: 'legendary',
+            },
+            'lucky_67': {
+                name: '✨ Lucky 67 Power',
+                description: 'Every 67th click = 67x bonus!',
+                rarity: 'legendary',
+            },
+            'golden_cookie': {
+                name: '⭐ Golden Cookie',
+                description: '1.3x Multiplier',
+                rarity: 'epic',
+            },
+            'multiplier_x2': {
+                name: '💎 Double Power',
+                description: '2x Multiplier',
+                rarity: 'legendary',
+            },
+        };
+
+        const state = {
+            cookies: 0,
+            clicks: 0,
+            cps: 0,
+            multiplier: 1,
+            upgrades: {},
+            lucky_67_active: false,
+            achievements: [],
+            upgrade_costs: {},
+            upgrade_values: {},
+            name: 'Anonymous Player',
+            emoji: '🎮',
+            rank: '-',
+        };
+
+        let selectedEmoji = '🎮';
+
+        const updateDisplay = () => {
+            const formatNumber = (n) => {
+                if (n >= 1e9) return (n / 1e9).toFixed(2) + 'B';
+                if (n >= 1e6) return (n / 1e6).toFixed(2) + 'M';
+                if (n >= 1e3) return (n / 1e3).toFixed(2) + 'K';
+                return Math.floor(n).toString();
+            };
+
+            document.getElementById('cookieDisplay').textContent = formatNumber(state.cookies);
+            document.getElementById('clickCount').textContent = state.clicks;
+            document.getElementById('cps').textContent = state.cps.toFixed(1);
+            document.getElementById('multiplier').textContent = state.multiplier.toFixed(2);
+            document.getElementById('playerEmoji').textContent = state.emoji;
+            document.getElementById('playerName').textContent = state.name;
+            document.getElementById('rankBadge').textContent = `Rank: #${state.rank}`;
+
+            if (state.multiplier > 1) {
+                document.getElementById('multiplierDisplay').style.display = 'block';
+            } else {
+                document.getElementById('multiplierDisplay').style.display = 'none';
+            }
+
+            updateUpgradeButtons();
+        };
+
+        const updateUpgradeButtons = () => {
+            for (const [upgrade, config] of Object.entries(UPGRADE_CONFIGS)) {
+                const btn = document.getElementById(`buy${upgrade.charAt(0).toUpperCase() + upgrade.slice(1)}`);
+                if (btn) {
+                    const cost = state.upgrade_costs[upgrade] || 0;
+                    btn.disabled = state.cookies < cost;
+                }
+            }
+        };
+
+        const renderUpgrades = () => {
+            const container = document.getElementById('upgradesContainer');
+            container.innerHTML = '';
+
+            const upgrades = [
+                ['grandma', 'robot', 'factory', 'alien', 'lucky_67', 'golden_cookie', 'multiplier_x2']
+            ];
+
+            upgrades[0].forEach(upgrade => {
+                const config = UPGRADE_CONFIGS[upgrade];
+                const cost = state.upgrade_costs[upgrade] || 0;
+                const count = state.upgrades[upgrade] || 0;
+                const isSinglePurchase = ['lucky_67', 'golden_cookie', 'multiplier_x2'].includes(upgrade);
+                const isPurchased = isSinglePurchase && count > 0;
+
+                const div = document.createElement('div');
+                div.className = `upgrade-item ${upgrade === 'lucky_67' ? 'lucky-67' : ''}`;
+                
+                if (upgrade === 'lucky_67' && state.cookies < 67) {
+                    div.style.display = 'none';
+                } else {
+                    div.style.display = 'block';
+                }
+
+                if (upgrade === 'golden_cookie' && !state.upgrades.lucky_67) {
+                    div.style.display = 'none';
+                } else if (upgrade === 'golden_cookie') {
+                    div.style.display = 'block';
+                }
+
+                div.innerHTML = `
+                    <div class="upgrade-header">
+                        <span class="upgrade-name">${config.name}</span>
+                        ${!isSinglePurchase && count > 0 ? `<span class="upgrade-count">${count}</span>` : ''}
+                    </div>
+                    <div class="upgrade-info">${config.description}</div>
+                    <div class="upgrade-cost">Cost: ${cost} cookies</div>
+                    <button onclick="buyUpgrade('${upgrade}')" id="buy${upgrade.charAt(0).toUpperCase() + upgrade.slice(1)}" 
+                        ${isPurchased ? 'disabled' : ''}>
+                        ${isPurchased ? '✅ Owned' : 'Buy'}
+                    </button>
+                `;
+                container.appendChild(div);
+            });
+        };
+
+        const renderAchievements = async () => {
+            const response = await fetch('/api/achievements');
+            const data = await response.json();
+            const container = document.getElementById('achievementsContainer');
+            container.innerHTML = '';
+
+            for (const [key, achievement] of Object.entries(data.all_achievements)) {
+                const isUnlocked = data.unlocked.includes(key);
+                const div = document.createElement('div');
+                div.className = `achievement ${!isUnlocked ? 'locked-achievement' : ''}`;
+                div.title = `${achievement.name} - ${achievement.icon}`;
+                div.innerHTML = `
+                    <span class="achievement-icon">${achievement.icon}</span>
+                    <div class="achievement-name">${achievement.name}</div>
+                `;
+                container.appendChild(div);
+            }
+        };
+
+        const renderLeaderboard = async () => {
+            const response = await fetch('/api/leaderboard');
+            const data = await response.json();
+            const tbody = document.getElementById('leaderboardBody');
+            tbody.innerHTML = '';
+
+            data.leaderboard.forEach((entry, index) => {
+                const rank = index + 1;
+                const tr = document.createElement('tr');
+                const rankClass = rank <= 3 ? `rank-${rank}` : '';
+                tr.innerHTML = `
+                    <td class="leaderboard-rank ${rankClass}">
+                        ${rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '#' + rank}
+                    </td>
+                    <td>
+                        <div class="leaderboard-player">
+                            <span class="leaderboard-emoji">${entry.emoji}</span>
+                            <span>${entry.name}</span>
+                        </div>
+                    </td>
+                    <td><strong>${formatNumber(entry.cookies)}</strong></td>
+                    <td>${entry.clicks}</td>
+                    <td>${entry.cps}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        };
+
+        const renderMilestones = async () => {
+            const response = await fetch('/api/milestones');
+            const data = await response.json();
+            const container = document.getElementById('milestonesDiv');
+            container.innerHTML = '';
+
+            if (data.milestones.length === 0) {
+                container.innerHTML = '<p style="color: #999;">Keep playing to unlock milestones!</p>';
+                return;
+            }
+
+            data.milestones.forEach(milestone => {
+                const div = document.createElement('div');
+                div.className = 'milestone';
+                div.innerHTML = `
+                    <span class="milestone-icon">${milestone.icon}</span>
+                    <span class="milestone-text">${milestone.title}</span>
+                `;
+                container.appendChild(div);
+            });
+        };
+
+        const renderStats = async () => {
+            const response = await fetch('/api/player-stats');
+            const data = await response.json();
+            state.name = data.name;
+            state.emoji = data.emoji;
+            state.rank = data.rank;
+
+            const container = document.getElementById('statsGrid');
+            container.innerHTML = '';
+
+            const stats = [
+                { label: 'Total Cookies', value: formatNumber(data.cookies), icon: '🍪' },
+                { label: 'Total Clicks', value: data.clicks, icon: '🖱️' },
+                { label: 'CPS', value: data.cps, icon: '📈' },
+                { label: 'Multiplier', value: data.multiplier + 'x', icon: '🚀' },
+                { label: 'Play Time', value: data.play_time_formatted, icon: '⏱️' },
+                { label: 'Achievements', value: `${data.achievements_unlocked}/${data.achievements_total}`, icon: '🏆' },
+                { label: 'Rank', value: '#' + data.rank, icon: '📊' },
+                { label: 'Avg per Click', value: formatNumber(data.avg_cookies_per_click), icon: '💰' },
+            ];
+
+            stats.forEach(stat => {
+                const div = document.createElement('div');
+                div.className = 'stat-box';
+                div.innerHTML = `
+                    <div class="stat-label">${stat.icon} ${stat.label}</div>
+                    <div class="stat-value">${stat.value}</div>
+                `;
+                container.appendChild(div);
+            });
+        };
+
+        const formatNumber = (n) => {
+            if (n >= 1e9) return (n / 1e9).toFixed(2) + 'B';
+            if (n >= 1e6) return (n / 1e6).toFixed(2) + 'M';
+            if (n >= 1e3) return (n / 1e3).toFixed(2) + 'K';
+            return Math.floor(n).toString();
+        };
+
+        const loadState = async () => {
+            const response = await fetch('/api/state');
+            const data = await response.json();
+            Object.assign(state, data);
+            updateDisplay();
+            renderUpgrades();
+            renderAchievements();
+            renderStats();
+        };
+
+        const click = async () => {
+            const response = await fetch('/api/click', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({}),
+            });
+            const data = await response.json();
+
+            state.cookies = data.cookies;
+            state.clicks = data.clicks;
+            state.cps = data.cps;
+            state.multiplier = data.multiplier;
+            updateDisplay();
+
+            if (data.is_lucky_67 && state.upgrades.lucky_67) {
+                const btn = document.getElementById('cookieBtn');
+                btn.classList.add('lucky-67-effect');
+                setTimeout(() => btn.classList.remove('lucky-67-effect'), 600);
+                showNotification(`🎉 LUCKY 67! +${Math.floor(data.cookies_earned)} cookies!`);
+            } else if (data.is_lucky_67) {
+                showNotification(`🍀 Click #67 reached! Unlock Lucky 67!`);
+            }
+
+            if (data.lucky_67_unlocked) {
+                renderUpgrades();
+                showNotification('✨ Lucky 67 Power unlocked!');
+            }
+
+            if (data.new_achievements && data.new_achievements.length > 0) {
+                data.new_achievements.forEach(ach => {
+                    renderAchievements();
+                });
+            }
+
+            renderStats();
+        };
+
+        const buyUpgrade = async (upgrade) => {
+            const response = await fetch('/api/buy', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ upgrade }),
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                showNotification('❌ ' + error.error);
+                return;
+            }
+
+            const data = await response.json();
+            state.cookies = data.cookies;
+            state.cps = data.cps;
+            state.multiplier = data.multiplier;
+            state.upgrades = data.upgrades;
+            updateDisplay();
+            renderUpgrades();
+            renderAchievements();
+            renderStats();
+
+            showNotification(`✅ ${UPGRADE_CONFIGS[upgrade].name} bought!`);
+        };
+
+        const showNotification = (message) => {
+            const notif = document.createElement('div');
+            notif.className = 'notification';
+            notif.textContent = message;
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 3000);
+        };
+
+        const resetGame = () => {
+            if (confirm('Weet je zeker? Dit verwijdert alle voortgang!')) {
+                fetch('/api/reset', { method: 'POST' }).then(() => location.reload());
+            }
+        };
+
+        const openPlayerModal = () => {
+            document.getElementById('playerModal').classList.add('show');
+            const emojiContainer = document.getElementById('emojiSelector');
+            emojiContainer.innerHTML = '';
+            EMOJIS.forEach(emoji => {
+                const btn = document.createElement('button');
+                btn.className = `emoji-btn ${emoji === selectedEmoji ? 'selected' : ''}`;
+                btn.textContent = emoji;
+                btn.style.margin = '0';
+                btn.onclick = () => {
+                    document.querySelectorAll('.emoji-btn').forEach(e => e.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    selectedEmoji = emoji;
+                };
+                emojiContainer.appendChild(btn);
+            });
+        };
+
+        const closePlayerModal = () => {
+            document.getElementById('playerModal').classList.remove('show');
+        };
+
+        const savePlayerProfile = async () => {
+            const name = document.getElementById('playerNameInput').value.trim();
+            if (!name) {
+                alert('Voer alstublieft je naam in!');
+                return;
+            }
+
+            const response = await fetch('/api/save-score', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, emoji: selectedEmoji }),
+            });
+
+            if (!response.ok) {
+                alert('Error saving profile');
+                return;
+            }
+
+            const data = await response.json();
+            state.name = name;
+            state.emoji = selectedEmoji;
+            state.rank = data.rank;
+            updateDisplay();
+            showNotification(data.message);
+            closePlayerModal();
+            renderLeaderboard();
+            renderStats();
+        };
+
+        const openLeaderboardTab = () => {
+            const leaderboardContainer = document.getElementById('leaderboardContainer');
+            leaderboardContainer.style.display = leaderboardContainer.style.display === 'none' ? 'block' : 'none';
+            renderLeaderboard();
+        };
+
+        document.getElementById('cookieBtn').addEventListener('click', click);
+        document.getElementById('playerModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('playerModal')) {
+                closePlayerModal();
+            }
+        });
+
+        loadState();
+        setInterval(loadState, 1000);
+        setInterval(renderMilestones, 5000);
+    </script>
+</body>
+</html>

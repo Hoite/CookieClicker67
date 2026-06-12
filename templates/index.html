@@ -12,229 +12,737 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             color: #333;
             padding: 20px;
         }
 
-        .container {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 1400px;
+        /* ====== Auth Modal ====== */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .auth-modal.active {
+            display: flex;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            background: #f0f0f0;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .auth-tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        .emoji-picker {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .emoji-option {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 2em;
+            transition: all 0.3s;
+        }
+
+        .emoji-option:hover {
+            transform: scale(1.1);
+        }
+
+        .emoji-option.selected {
+            border-color: #667eea;
+            background: #f0f0f0;
+        }
+
+        .auth-button {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .auth-button:hover {
+            background: #5568d3;
+        }
+
+        .auth-error {
+            color: #dc3545;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        /* ====== Main Wrapper ====== */
+        .main-wrapper {
+            display: none;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .main-wrapper.active {
+            display: block;
+        }
+
+        /* ====== Top Bar ====== */
+        .top-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .player-profile {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .player-emoji {
+            font-size: 1.3em;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: #f0f0f0;
+            color: #333;
+            border: 2px solid transparent;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .nav-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-btn:hover {
+            border-color: #667eea;
+        }
+
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
+        }
+
+        /* ====== Game Container ====== */
+        .game-container {
+            display: none;
+        }
+
+        .game-container.active {
             display: grid;
             grid-template-columns: 1.2fr 1fr 1fr;
             gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         .clicker-section {
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-        }
-
-        h1 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 2.5em;
-        }
-
-        h2 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.5em;
+            align-items: center;
+            gap: 20px;
         }
 
         .cookie-display {
-            font-size: 4em;
-            margin: 20px 0;
+            font-size: 2.5em;
             font-weight: bold;
-            background: linear-gradient(45deg, #ff6b6b, #ffa500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #667eea;
+            text-align: center;
+        }
+
+        .big-cookie {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at 30% 30%, #f4d03f, #d4a017);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 120px;
+            cursor: pointer;
+            box-shadow: 0 15px 40px rgba(212, 160, 23, 0.4);
+            transition: all 0.1s;
+            user-select: none;
+        }
+
+        .big-cookie:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(212, 160, 23, 0.6);
+        }
+
+        .big-cookie:active {
+            transform: scale(0.95);
         }
 
         .stats {
-            font-size: 1.1em;
-            margin: 10px 0;
+            text-align: center;
+            font-size: 0.95em;
             color: #666;
         }
 
-        .stats .label {
+        .stats div {
+            margin: 5px 0;
+        }
+
+        .stat-label {
             font-weight: bold;
             color: #333;
         }
 
-        .cookie-btn {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            border: none;
-            background: radial-gradient(circle at 30% 30%, #ffb366, #ff8c42);
-            cursor: pointer;
-            font-size: 80px;
-            transition: all 0.1s;
-            box-shadow: 0 10px 30px rgba(255, 140, 66, 0.4);
-            position: relative;
-            overflow: hidden;
-            margin: 20px 0;
-        }
-
-        .cookie-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(255, 140, 66, 0.6);
-        }
-
-        .cookie-btn:active {
-            transform: scale(0.95);
-        }
-
-        .lucky-67-effect {
-            animation: lucky67 0.6s ease-out;
-        }
-
-        @keyframes lucky67 {
-            0% {
-                transform: scale(1) rotate(0deg);
-            }
-            50% {
-                transform: scale(1.3) rotate(20deg);
-            }
-            100% {
-                transform: scale(0.95) rotate(0deg);
-            }
-        }
-
-        .upgrades-section, .achievements-section {
+        .section-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 20px;
             display: flex;
-            flex-direction: column;
-            gap: 12px;
-            max-height: 600px;
-            overflow-y: auto;
-            padding-right: 10px;
-        }
-
-        .upgrades-section::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .upgrades-section::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .upgrades-section::-webkit-scrollbar-thumb {
-            background: #667eea;
-            border-radius: 10px;
+            align-items: center;
+            gap: 10px;
         }
 
         .upgrade-item {
             background: #f8f9fa;
-            border: 2px solid #e9ecef;
+            padding: 15px;
             border-radius: 10px;
-            padding: 12px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .upgrade-item:hover:not(:disabled) {
-            border-color: #667eea;
-            background: #f0f3ff;
-            transform: translateX(5px);
-        }
-
-        .upgrade-item:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .upgrade-item.lucky-67 {
-            border: 3px solid #ffa500;
-            background: linear-gradient(135deg, #fff9e6, #ffe6cc);
-        }
-
-        .upgrade-item.lucky-67:hover:not(:disabled) {
-            box-shadow: 0 0 20px rgba(255, 165, 0, 0.5);
-        }
-
-        .upgrade-header {
+            margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid #667eea;
+        }
+
+        .upgrade-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .upgrade-info {
+            flex: 1;
         }
 
         .upgrade-name {
             font-weight: bold;
-            font-size: 1em;
             color: #333;
         }
 
         .upgrade-count {
-            background: #667eea;
-            color: white;
-            border-radius: 20px;
-            padding: 2px 8px;
             font-size: 0.8em;
-            display: inline-block;
+            color: #666;
         }
 
         .upgrade-cost {
-            color: #999;
-            font-size: 0.85em;
-            margin-top: 4px;
-        }
-
-        .upgrade-info {
-            font-size: 0.8em;
-            color: #666;
-            margin-top: 4px;
-        }
-
-        button {
-            padding: 8px 15px;
             background: #667eea;
             color: white;
-            border: none;
+            padding: 8px 12px;
             border-radius: 6px;
-            cursor: pointer;
             font-size: 0.9em;
+            font-weight: bold;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .achievement-item {
+            padding: 15px;
+            background: #fff3cd;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #ffc107;
             transition: all 0.3s;
-            margin-top: 8px;
+        }
+
+        .achievement-item.locked {
+            opacity: 0.4;
+            background: #e9ecef;
+            border-color: #ddd;
+        }
+
+        .achievement-icon {
+            font-size: 2.5em;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .achievement-name {
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        /* ====== Leaderboard Container ====== */
+        .leaderboard-container {
+            display: none;
+        }
+
+        .leaderboard-container.active {
+            display: block;
+        }
+
+        .leaderboard-controls {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .sort-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .sort-btn {
+            background: #f0f0f0;
+            border: 2px solid transparent;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85em;
+            transition: all 0.3s;
+        }
+
+        .sort-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .sort-btn:hover {
+            border-color: #667eea;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            position: relative;
+        }
+
+        .search-box input {
             width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.95em;
         }
 
-        button:hover {
-            background: #5568d3;
-            transform: translateY(-2px);
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
         }
 
-        button:disabled {
-            background: #ccc;
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 5px;
+            display: none;
+            z-index: 100;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .search-result-item:hover {
+            background: #f0f0f0;
+        }
+
+        .leaderboard-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .leaderboard-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            border-left: 5px solid #667eea;
+        }
+
+        .leaderboard-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .leaderboard-card.top3 {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        }
+
+        .leaderboard-rank {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .leaderboard-rank.top1 {
+            font-size: 2.5em;
+            color: #ffd700;
+        }
+
+        .leaderboard-rank.top2 {
+            color: #c0c0c0;
+        }
+
+        .leaderboard-rank.top3 {
+            color: #cd7f32;
+        }
+
+        .leaderboard-info {
+            flex: 1;
+        }
+
+        .leaderboard-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .leaderboard-emoji {
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+
+        .leaderboard-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9em;
+            color: #666;
+            flex-wrap: wrap;
+        }
+
+        .leaderboard-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .leaderboard-stat-label {
+            font-weight: bold;
+        }
+
+        .leaderboard-score {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+            min-width: 100px;
+            text-align: right;
+        }
+
+        /* ====== Player Profile Modal ====== */
+        .profile-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .profile-modal.active {
+            display: flex;
+        }
+
+        .profile-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .profile-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .profile-emoji-large {
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+
+        .profile-username {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .profile-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .profile-stat-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .profile-stat-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .profile-stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .profile-games {
+            margin-top: 30px;
+        }
+
+        .profile-games-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .profile-game-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* ====== Pagination ====== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .pagination-btn {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pagination-btn:hover:not(:disabled) {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .pagination-btn:disabled {
+            opacity: 0.5;
             cursor: not-allowed;
-            transform: none;
         }
 
+        .pagination-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        /* ====== Notifications ====== */
         .notification {
             position: fixed;
-            top: 20px;
+            bottom: 20px;
             right: 20px;
-            background: #ffa500;
+            background: #28a745;
             color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            font-weight: bold;
-            animation: slideIn 0.3s ease-out, slideOut 2.7s ease-in 0.3s forwards;
-            z-index: 1000;
-            max-width: 300px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.3s ease-out;
+            z-index: 999;
+        }
+
+        .notification.error {
+            background: #dc3545;
         }
 
         @keyframes slideIn {
@@ -248,389 +756,722 @@
             }
         }
 
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-        }
-
-        .cps-display, .multiplier-display, .click-count {
-            background: #e9ecef;
-            padding: 10px 15px;
+        /* ====== Buttons ====== */
+        .btn {
+            padding: 10px 16px;
+            border: none;
             border-radius: 8px;
-            margin: 8px 0;
-            font-size: 1em;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
         }
 
-        .multiplier-display {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+        .btn-primary {
+            background: #667eea;
             color: white;
         }
 
-        .achievement {
-            background: linear-gradient(45deg, #ffd700, #ffed4e);
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: bold;
-            cursor: help;
-            transition: transform 0.3s;
+        .btn-primary:hover {
+            background: #5568d3;
         }
 
-        .achievement:hover {
-            transform: scale(1.1);
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
         }
 
-        .achievement-icon {
-            font-size: 1.8em;
-            display: block;
+        .btn-secondary:hover {
+            background: #5a6268;
         }
 
-        .achievement-name {
-            font-size: 0.8em;
-            margin-top: 4px;
-        }
-
-        .locked-achievement {
-            opacity: 0.3;
-            background: #ccc;
-        }
-
-        .reset-btn {
-            background: #ff6b6b;
-            margin-top: 20px;
-            width: 100%;
-        }
-
-        .reset-btn:hover {
-            background: #ff5252;
-        }
-
+        /* ====== Responsive ====== */
         @media (max-width: 1200px) {
-            .container {
-                grid-template-columns: 1fr 1fr;
+            .game-container {
+                grid-template-columns: 1fr;
+            }
+
+            .leaderboard-controls {
+                flex-direction: column;
+            }
+
+            .search-box {
+                min-width: 100%;
             }
         }
 
         @media (max-width: 768px) {
-            .container {
+            .top-bar {
+                flex-direction: column;
+            }
+
+            .leaderboard-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .leaderboard-stats {
+                justify-content: center;
+            }
+
+            .leaderboard-score {
+                text-align: center;
+            }
+
+            .achievement-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .profile-stats-grid {
                 grid-template-columns: 1fr;
             }
-
-            .cookie-btn {
-                width: 150px;
-                height: 150px;
-                font-size: 60px;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-        }
-
-        .info-box {
-            background: #f0f3ff;
-            border: 1px solid #667eea;
-            border-radius: 8px;
-            padding: 12px;
-            font-size: 0.9em;
-            color: #666;
-            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Clicker Section -->
-        <div class="clicker-section">
-            <h1>🍪 Cookie Clicker 67</h1>
-            <div class="cookie-display" id="cookieDisplay">0</div>
-            
-            <div class="cps-display" id="cpsDisplay">
-                <span class="label">📈 Cookies/sec:</span> <span id="cps">0</span>
-            </div>
-            
-            <div class="multiplier-display" id="multiplierDisplay" style="display: none;">
-                🚀 Multiplier: <span id="multiplier">1</span>x
-            </div>
-            
-            <div class="click-count">
-                Click #: <span id="clickCount">0</span>
+    <!-- Auth Modal -->
+    <div class="auth-modal active" id="authModal">
+        <div class="auth-container">
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchTab('login')">Login</button>
+                <button class="auth-tab" onclick="switchTab('register')">Register</button>
             </div>
 
-            <button class="cookie-btn" id="cookieBtn">🍪</button>
-            
-            <div class="info-box">
-                💡 Koop upgrades voor passieve inkomsten! Elke 67de klik = 67x bonus als Lucky 67 geactiveerd is!
+            <form class="auth-form active" id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="loginUsername" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="auth-button">Login</button>
+                <div class="auth-error" id="loginError"></div>
+            </form>
+
+            <form class="auth-form" id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="registerUsername" required autocomplete="username">
+                    <small>3-20 characters, alphanumeric + underscore</small>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="registerPassword" required autocomplete="new-password">
+                    <small>At least 6 characters</small>
+                </div>
+                <div class="form-group">
+                    <label>Choose Avatar</label>
+                    <div class="emoji-picker" id="emojiPicker">
+                        <span class="emoji-option" data-emoji="🎮">🎮</span>
+                        <span class="emoji-option" data-emoji="🍪">🍪</span>
+                        <span class="emoji-option" data-emoji="🚀">🚀</span>
+                        <span class="emoji-option" data-emoji="⭐">⭐</span>
+                        <span class="emoji-option" data-emoji="🎯">🎯</span>
+                        <span class="emoji-option" data-emoji="👑">👑</span>
+                        <span class="emoji-option" data-emoji="🔥">🔥</span>
+                        <span class="emoji-option" data-emoji="💎">💎</span>
+                    </div>
+                </div>
+                <button type="submit" class="auth-button">Register</button>
+                <div class="auth-error" id="registerError"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-wrapper" id="mainWrapper">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="logo">🍪 Cookie Clicker 67</div>
+            <div class="player-info">
+                <div class="player-profile">
+                    <span class="player-emoji" id="playerEmoji">🎮</span>
+                    <span id="playerUsername">Player</span>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="switchView('game')">🎮 Game</button>
+                <button class="nav-btn" onclick="switchView('leaderboard')">📊 Leaderboard</button>
+            </div>
+            <button class="logout-btn" onclick="handleLogout()">Logout</button>
+        </div>
+
+        <!-- Game View -->
+        <div class="game-container active" id="gameView">
+            <!-- Clicker Section -->
+            <div class="card clicker-section">
+                <div class="cookie-display">
+                    🍪 <span id="cookieCount">0</span>
+                </div>
+                <div class="big-cookie" id="cookieButton">🍪</div>
+                <div class="stats">
+                    <div><span class="stat-label">Clicks:</span> <span id="clickCount">0</span></div>
+                    <div><span class="stat-label">CPS:</span> <span id="cpsDisplay">0</span></div>
+                    <div><span class="stat-label">Multiplier:</span> <span id="multiplier">1x</span></div>
+                </div>
+                <div style="display: flex; gap: 10px; width: 100%;">
+                    <button class="btn btn-primary" onclick="saveScore()" style="flex: 1;">💾 Save Score</button>
+                    <button class="btn btn-secondary" onclick="handleReset()" style="flex: 1;">🔄 Reset</button>
+                </div>
+            </div>
+
+            <!-- Upgrades Section -->
+            <div class="card">
+                <div class="section-title">🛠️ Upgrades</div>
+                <div id="upgradesList"></div>
+            </div>
+
+            <!-- Achievements Section -->
+            <div class="card">
+                <div class="section-title">🏆 Achievements</div>
+                <div class="achievement-grid" id="achievementsList"></div>
             </div>
         </div>
 
-        <!-- Upgrades Section -->
-        <div>
-            <h2>⬆️ Upgrades</h2>
-            <div class="upgrades-section" id="upgradesContainer">
-                <!-- Dynamically generated -->
+        <!-- Leaderboard View -->
+        <div class="leaderboard-container" id="leaderboardView">
+            <!-- Controls -->
+            <div class="leaderboard-controls">
+                <div class="sort-buttons">
+                    <button class="sort-btn active" onclick="changeSortBy('cookies')">🍪 Cookies</button>
+                    <button class="sort-btn" onclick="changeSortBy('clicks')">🖱️ Clicks</button>
+                    <button class="sort-btn" onclick="changeSortBy('cps')">⚡ CPS</button>
+                    <button class="sort-btn" onclick="changeSortBy('achievements')">🏆 Achievements</button>
+                    <button class="sort-btn" onclick="changeSortBy('play_time')">⏱️ Play Time</button>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search player..." onkeyup="handleSearch(event)">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
             </div>
-            <button class="reset-btn" onclick="resetGame()">🔄 Reset Game</button>
-        </div>
 
-        <!-- Achievements Section -->
-        <div>
-            <h2>🏆 Achievements</h2>
-            <div class="achievements-section" id="achievementsContainer">
-                <!-- Dynamically generated -->
+            <!-- Leaderboard Grid -->
+            <div class="leaderboard-grid" id="leaderboardGrid"></div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination"></div>
+        </div>
+    </div>
+
+    <!-- Player Profile Modal -->
+    <div class="profile-modal" id="profileModal">
+        <div class="profile-container">
+            <button class="profile-close" onclick="closeProfile()">✕</button>
+            <div class="profile-header">
+                <div class="profile-emoji-large" id="profileEmoji">🎮</div>
+                <div class="profile-username" id="profileUsername">Player</div>
             </div>
+            <div class="profile-stats-grid" id="profileStatsGrid"></div>
+            <div class="profile-games" id="profileGames"></div>
         </div>
     </div>
 
     <script>
-        const UPGRADE_CONFIGS = {
-            'grandma': {
-                name: '👵 Grandma',
-                description: '+1 CPS',
-                rarity: 'common',
-            },
-            'robot': {
-                name: '🤖 Robot Baker',
-                description: '+5 CPS',
-                rarity: 'uncommon',
-            },
-            'factory': {
-                name: '🏭 Factory',
-                description: '+20 CPS',
-                rarity: 'rare',
-            },
-            'alien': {
-                name: '👽 Alien',
-                description: '+100 CPS',
-                rarity: 'legendary',
-            },
-            'lucky_67': {
-                name: '✨ Lucky 67 Power',
-                description: 'Every 67th click = 67x bonus!',
-                rarity: 'legendary',
-            },
-            'golden_cookie': {
-                name: '⭐ Golden Cookie',
-                description: '1.3x Multiplier',
-                rarity: 'epic',
-            },
-            'multiplier_x2': {
-                name: '💎 Double Power',
-                description: '2x Multiplier',
-                rarity: 'legendary',
-            },
-        };
+        let currentView = 'game';
+        let currentSort = 'cookies';
+        let currentPage = 0;
+        let currentEmoji = '🎮';
+        let currentUsername = '';
+        let currentUserId = '';
+        let gameState = null;
 
-        const state = {
-            cookies: 0,
-            clicks: 0,
-            cps: 0,
-            multiplier: 1,
-            upgrades: {},
-            lucky_67_active: false,
-            achievements: [],
-            upgrade_costs: {},
-            upgrade_values: {},
-        };
+        // ====== Auth Functions ======
 
-        const updateDisplay = () => {
-            const formatNumber = (n) => {
-                if (n >= 1e9) return (n / 1e9).toFixed(2) + 'B';
-                if (n >= 1e6) return (n / 1e6).toFixed(2) + 'M';
-                if (n >= 1e3) return (n / 1e3).toFixed(2) + 'K';
-                return Math.floor(n).toString();
-            };
+        function switchTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
 
-            document.getElementById('cookieDisplay').textContent = formatNumber(state.cookies);
-            document.getElementById('clickCount').textContent = state.clicks;
-            document.getElementById('cps').textContent = state.cps.toFixed(1);
-            document.getElementById('multiplier').textContent = state.multiplier.toFixed(2);
-
-            // Show multiplier display only if multiplier > 1
-            if (state.multiplier > 1) {
-                document.getElementById('multiplierDisplay').style.display = 'block';
+            if (tab === 'login') {
+                document.querySelector('.auth-tabs button:first-child').classList.add('active');
+                document.getElementById('loginForm').classList.add('active');
             } else {
-                document.getElementById('multiplierDisplay').style.display = 'none';
+                document.querySelector('.auth-tabs button:last-child').classList.add('active');
+                document.getElementById('registerForm').classList.add('active');
+                initEmojiPicker();
             }
+        }
 
-            updateUpgradeButtons();
-        };
-
-        const updateUpgradeButtons = () => {
-            for (const [upgrade, config] of Object.entries(UPGRADE_CONFIGS)) {
-                const btn = document.getElementById(`buy${upgrade.charAt(0).toUpperCase() + upgrade.slice(1)}`);
-                if (btn) {
-                    const cost = state.upgrade_costs[upgrade] || 0;
-                    btn.disabled = state.cookies < cost;
-                }
-            }
-        };
-
-        const renderUpgrades = () => {
-            const container = document.getElementById('upgradesContainer');
-            container.innerHTML = '';
-
-            const upgrades = [
-                ['grandma', 'robot', 'factory', 'alien', 'lucky_67', 'golden_cookie', 'multiplier_x2']
-            ];
-
-            upgrades[0].forEach(upgrade => {
-                const config = UPGRADE_CONFIGS[upgrade];
-                const cost = state.upgrade_costs[upgrade] || 0;
-                const count = state.upgrades[upgrade] || 0;
-                const isSinglePurchase = ['lucky_67', 'golden_cookie', 'multiplier_x2'].includes(upgrade);
-                const isPurchased = isSinglePurchase && count > 0;
-
-                const div = document.createElement('div');
-                div.className = `upgrade-item ${upgrade === 'lucky_67' ? 'lucky-67' : ''}`;
-                
-                // Show Lucky 67 only after 67 cookies are reached
-                if (upgrade === 'lucky_67' && state.cookies < 67) {
-                    div.style.display = 'none';
-                } else {
-                    div.style.display = 'block';
-                }
-
-                // Show Golden Cookie only after lucky_67 is purchased
-                if (upgrade === 'golden_cookie' && !state.upgrades.lucky_67) {
-                    div.style.display = 'none';
-                } else if (upgrade === 'golden_cookie') {
-                    div.style.display = 'block';
-                }
-
-                div.innerHTML = `
-                    <div class="upgrade-header">
-                        <span class="upgrade-name">${config.name}</span>
-                        ${!isSinglePurchase && count > 0 ? `<span class="upgrade-count">${count}</span>` : ''}
-                    </div>
-                    <div class="upgrade-info">${config.description}</div>
-                    <div class="upgrade-cost">Cost: ${cost} cookies</div>
-                    <button onclick="buyUpgrade('${upgrade}')" id="buy${upgrade.charAt(0).toUpperCase() + upgrade.slice(1)}" 
-                        ${isPurchased ? 'disabled' : ''}>
-                        ${isPurchased ? '✅ Owned' : 'Buy'}
-                    </button>
-                `;
-                container.appendChild(div);
-            });
-        };
-
-        const renderAchievements = async () => {
-            const response = await fetch('/api/achievements');
-            const data = await response.json();
-            const container = document.getElementById('achievementsContainer');
-            container.innerHTML = '';
-
-            for (const [key, achievement] of Object.entries(data.all_achievements)) {
-                const isUnlocked = data.unlocked.includes(key);
-                const div = document.createElement('div');
-                div.className = `achievement ${!isUnlocked ? 'locked-achievement' : ''}`;
-                div.title = `${achievement.name} - ${achievement.icon}`;
-                div.innerHTML = `
-                    <span class="achievement-icon">${achievement.icon}</span>
-                    <div class="achievement-name">${achievement.name}</div>
-                `;
-                container.appendChild(div);
-            }
-        };
-
-        const loadState = async () => {
-            const response = await fetch('/api/state');
-            const data = await response.json();
-            Object.assign(state, data);
-            updateDisplay();
-            renderUpgrades();
-            renderAchievements();
-        };
-
-        const click = async () => {
-            const response = await fetch('/api/click', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({}),
-            });
-            const data = await response.json();
-
-            state.cookies = data.cookies;
-            state.clicks = data.clicks;
-            state.cps = data.cps;
-            state.multiplier = data.multiplier;
-            updateDisplay();
-
-            // Lucky 67 effect
-            if (data.is_lucky_67 && state.upgrades.lucky_67) {
-                const btn = document.getElementById('cookieBtn');
-                btn.classList.add('lucky-67-effect');
-                setTimeout(() => btn.classList.remove('lucky-67-effect'), 600);
-                showNotification(`🎉 LUCKY 67! +${Math.floor(data.cookies_earned)} cookies!`);
-            } else if (data.is_lucky_67) {
-                showNotification(`🍀 Click #67 reached! Unlock Lucky 67!`);
-            }
-
-            // Unlock Lucky 67
-            if (data.lucky_67_unlocked) {
-                renderUpgrades();
-                showNotification('✨ Lucky 67 Power unlocked!');
-            }
-
-            // Achievements
-            if (data.new_achievements && data.new_achievements.length > 0) {
-                data.new_achievements.forEach(ach => {
-                    renderAchievements();
+        function initEmojiPicker() {
+            document.querySelectorAll('.emoji-option').forEach(el => {
+                el.classList.remove('selected');
+                el.addEventListener('click', (e) => {
+                    document.querySelectorAll('.emoji-option').forEach(o => o.classList.remove('selected'));
+                    e.target.classList.add('selected');
+                    currentEmoji = e.target.dataset.emoji;
                 });
-            }
-        };
-
-        const buyUpgrade = async (upgrade) => {
-            const response = await fetch('/api/buy', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ upgrade }),
             });
+            document.querySelector('.emoji-option').classList.add('selected');
+        }
 
-            if (!response.ok) {
-                const error = await response.json();
-                showNotification('❌ ' + error.error);
+        async function handleLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({username, password})
+                });
+
+                if (!res.ok) {
+                    throw new Error('Invalid credentials');
+                }
+
+                const data = await res.json();
+                currentUsername = data.username;
+                currentUserId = data.user_id;
+                currentEmoji = data.emoji;
+
+                showGame();
+            } catch (err) {
+                document.getElementById('loginError').textContent = err.message;
+            }
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+
+            if (username.length < 3 || username.length > 20) {
+                document.getElementById('registerError').textContent = 'Username must be 3-20 characters';
                 return;
             }
 
-            const data = await response.json();
-            state.cookies = data.cookies;
-            state.cps = data.cps;
-            state.multiplier = data.multiplier;
-            state.upgrades = data.upgrades;
-            updateDisplay();
-            renderUpgrades();
-            renderAchievements();
+            if (password.length < 6) {
+                document.getElementById('registerError').textContent = 'Password must be at least 6 characters';
+                return;
+            }
 
-            showNotification(`✅ ${UPGRADE_CONFIGS[upgrade].name} bought!`);
-        };
+            try {
+                const res = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({username, password, emoji: currentEmoji})
+                });
 
-        const showNotification = (message) => {
+                if (!res.ok) {
+                    const err = await res.json();
+                    throw new Error(err.error || 'Registration failed');
+                }
+
+                const data = await res.json();
+                currentUsername = data.username;
+                currentUserId = data.user_id;
+                currentEmoji = data.emoji;
+
+                showGame();
+            } catch (err) {
+                document.getElementById('registerError').textContent = err.message;
+            }
+        }
+
+        async function handleLogout() {
+            await fetch('/api/auth/logout', {method: 'POST'});
+            location.reload();
+        }
+
+        // ====== View Functions ======
+
+        function showGame() {
+            document.getElementById('authModal').classList.remove('active');
+            document.getElementById('mainWrapper').classList.add('active');
+            document.getElementById('playerUsername').textContent = currentUsername;
+            document.getElementById('playerEmoji').textContent = currentEmoji;
+            init();
+        }
+
+        function switchView(view) {
+            currentView = view;
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (view === 'game') {
+                document.getElementById('gameView').classList.add('active');
+                document.getElementById('leaderboardView').classList.remove('active');
+            } else {
+                document.getElementById('gameView').classList.remove('active');
+                document.getElementById('leaderboardView').classList.add('active');
+                currentPage = 0;
+                loadLeaderboard();
+            }
+        }
+
+        // ====== Game Functions ======
+
+        async function init() {
+            document.getElementById('cookieButton').addEventListener('click', handleClick);
+            loadState();
+            setInterval(loadState, 1000);
+        }
+
+        async function loadState() {
+            try {
+                const res = await fetch('/api/state');
+                if (!res.ok) return;
+
+                gameState = await res.json();
+                updateDisplay();
+            } catch (err) {
+                console.error('Error loading state:', err);
+            }
+        }
+
+        async function handleClick() {
+            try {
+                const res = await fetch('/api/click', {method: 'POST'});
+                const data = await res.json();
+
+                if (data.cookies_earned > 1) {
+                    showNotification(`+${Math.round(data.cookies_earned)} 🍪`);
+                }
+
+                gameState = data;
+                updateDisplay();
+            } catch (err) {
+                console.error('Click error:', err);
+            }
+        }
+
+        async function buyUpgrade(upgrade) {
+            try {
+                const res = await fetch('/api/buy', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({upgrade})
+                });
+
+                if (!res.ok) {
+                    const err = await res.json();
+                    showNotification(err.error, 'error');
+                    return;
+                }
+
+                const data = await res.json();
+                gameState = data;
+                updateDisplay();
+                showNotification(`Bought ${upgrade}!`);
+            } catch (err) {
+                console.error('Buy error:', err);
+            }
+        }
+
+        async function handleReset() {
+            if (!confirm('Reset game? This cannot be undone!')) return;
+
+            try {
+                await fetch('/api/reset', {method: 'POST'});
+                gameState = null;
+                loadState();
+            } catch (err) {
+                console.error('Reset error:', err);
+            }
+        }
+
+        async function saveScore() {
+            try {
+                const res = await fetch('/api/save-score', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({emoji: currentEmoji})
+                });
+
+                if (!res.ok) {
+                    throw new Error('Failed to save score');
+                }
+
+                const data = await res.json();
+                showNotification(`🎉 ${data.message}`);
+            } catch (err) {
+                showNotification(err.message, 'error');
+            }
+        }
+
+        function updateDisplay() {
+            if (!gameState) return;
+
+            document.getElementById('cookieCount').textContent = Math.floor(gameState.cookies);
+            document.getElementById('clickCount').textContent = gameState.clicks;
+            document.getElementById('cpsDisplay').textContent = Math.round(gameState.cps * 100) / 100;
+            document.getElementById('multiplier').textContent = (Math.round(gameState.multiplier * 100) / 100) + 'x';
+
+            updateUpgrades();
+            updateAchievements();
+        }
+
+        function updateUpgrades() {
+            const list = document.getElementById('upgradesList');
+            list.innerHTML = '';
+
+            const upgradeNames = ['grandma', 'robot', 'factory', 'alien', 'lucky_67', 'golden_cookie', 'multiplier_x2'];
+
+            upgradeNames.forEach(up => {
+                const cost = gameState.upgrade_costs[up];
+                const count = gameState.upgrades[up];
+                const isPurchased = typeof count === 'boolean' ? count : count > 0;
+
+                const item = document.createElement('div');
+                item.className = 'upgrade-item';
+                item.innerHTML = `
+                    <div class="upgrade-info">
+                        <div class="upgrade-name">${up.charAt(0).toUpperCase() + up.slice(1).replace(/_/g, ' ')}</div>
+                        ${typeof count === 'number' && count > 0 ? `<div class="upgrade-count">Owned: ${count}</div>` : ''}
+                    </div>
+                    <span class="upgrade-cost">${cost}</span>
+                `;
+                item.addEventListener('click', () => buyUpgrade(up));
+                list.appendChild(item);
+            });
+        }
+
+        function updateAchievements() {
+            const list = document.getElementById('achievementsList');
+            list.innerHTML = '';
+
+            const allAchievements = {
+                'first_click': {name: 'First Click', icon: '🖱️'},
+                'hundred_cookies': {name: '100 Cookies', icon: '💯'},
+                'thousand_cookies': {name: '1000 Cookies', icon: '🤑'},
+                'ten_thousand_cookies': {name: '10K Cookies', icon: '💰'},
+                'lucky_67_unlock': {name: 'Lucky 67', icon: '✨'},
+                'speed_clicker': {name: 'Speed Clicker', icon: '⚡'},
+                'cookie_tycoon': {name: 'Cookie Tycoon', icon: '👑'},
+            };
+
+            Object.entries(allAchievements).forEach(([key, ach]) => {
+                const isUnlocked = gameState.achievements.includes(key);
+                const item = document.createElement('div');
+                item.className = 'achievement-item' + (isUnlocked ? '' : ' locked');
+                item.innerHTML = `
+                    <span class="achievement-icon">${ach.icon}</span>
+                    <div class="achievement-name">${ach.name}</div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        // ====== Leaderboard Functions ======
+
+        async function loadLeaderboard() {
+            try {
+                const res = await fetch(`/api/leaderboard?sort=${currentSort}&page=${currentPage}&limit=10`);
+                const data = await res.json();
+
+                renderLeaderboard(data.leaderboard, data.page, data.total);
+                renderPagination(data.page, Math.ceil(data.total / data.limit));
+            } catch (err) {
+                console.error('Leaderboard error:', err);
+            }
+        }
+
+        function renderLeaderboard(leaderboard, page, total) {
+            const grid = document.getElementById('leaderboardGrid');
+            grid.innerHTML = '';
+
+            leaderboard.forEach((entry, i) => {
+                const rank = page * 10 + i + 1;
+                const card = document.createElement('div');
+                card.className = 'leaderboard-card' + (rank <= 3 ? ' top3' : '');
+                card.onclick = () => showProfile(entry.name);
+
+                const rankClass = rank === 1 ? 'top1' : rank === 2 ? 'top2' : rank === 3 ? 'top3' : '';
+                const rankDisplay = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : `#${rank}`;
+
+                card.innerHTML = `
+                    <div class="leaderboard-rank ${rankClass}">${rankDisplay}</div>
+                    <div class="leaderboard-info">
+                        <div class="leaderboard-name">
+                            <span class="leaderboard-emoji">${entry.emoji}</span>
+                            ${entry.name}
+                        </div>
+                        <div class="leaderboard-stats">
+                            <div class="leaderboard-stat">
+                                <span class="leaderboard-stat-label">🍪:</span>
+                                <span>${Math.floor(entry.cookies)}</span>
+                            </div>
+                            <div class="leaderboard-stat">
+                                <span class="leaderboard-stat-label">🖱️:</span>
+                                <span>${entry.clicks}</span>
+                            </div>
+                            <div class="leaderboard-stat">
+                                <span class="leaderboard-stat-label">⚡:</span>
+                                <span>${entry.cps}</span>
+                            </div>
+                            <div class="leaderboard-stat">
+                                <span class="leaderboard-stat-label">🏆:</span>
+                                <span>${entry.achievements}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="leaderboard-score">${Math.floor(entry.cookies).toLocaleString()}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function renderPagination(page, totalPages) {
+            const pag = document.getElementById('pagination');
+            pag.innerHTML = '';
+
+            const btn = document.createElement('button');
+            btn.className = 'pagination-btn';
+            btn.textContent = '← Prev';
+            btn.disabled = page === 0;
+            btn.onclick = () => {
+                if (page > 0) {
+                    currentPage--;
+                    loadLeaderboard();
+                }
+            };
+            pag.appendChild(btn);
+
+            for (let i = 0; i < totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'pagination-btn' + (i === page ? ' active' : '');
+                btn.textContent = i + 1;
+                btn.onclick = () => {
+                    currentPage = i;
+                    loadLeaderboard();
+                };
+                pag.appendChild(btn);
+            }
+
+            const btn2 = document.createElement('button');
+            btn2.className = 'pagination-btn';
+            btn2.textContent = 'Next →';
+            btn2.disabled = page === totalPages - 1;
+            btn2.onclick = () => {
+                if (page < totalPages - 1) {
+                    currentPage++;
+                    loadLeaderboard();
+                }
+            };
+            pag.appendChild(btn2);
+        }
+
+        function changeSortBy(sort) {
+            currentSort = sort;
+            currentPage = 0;
+            document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            loadLeaderboard();
+        }
+
+        async function handleSearch(e) {
+            const query = e.target.value.trim();
+            const results = document.getElementById('searchResults');
+
+            if (!query || query.length < 2) {
+                results.classList.remove('active');
+                return;
+            }
+
+            try {
+                const res = await fetch(`/api/leaderboard/search?q=${encodeURIComponent(query)}`);
+                const data = await res.json();
+
+                results.innerHTML = '';
+                data.results.forEach(r => {
+                    const item = document.createElement('div');
+                    item.className = 'search-result-item';
+                    item.textContent = `${r.emoji} ${r.name} - ${Math.floor(r.cookies)} 🍪`;
+                    item.onclick = () => {
+                        showProfile(r.name);
+                        results.classList.remove('active');
+                        e.target.value = '';
+                    };
+                    results.appendChild(item);
+                });
+
+                results.classList.add('active');
+            } catch (err) {
+                console.error('Search error:', err);
+            }
+        }
+
+        async function showProfile(username) {
+            try {
+                const res = await fetch(`/api/player/${encodeURIComponent(username)}`);
+                if (!res.ok) throw new Error('Player not found');
+
+                const data = await res.json();
+                const modal = document.getElementById('profileModal');
+
+                document.getElementById('profileEmoji').textContent = data.best_score?.emoji || '🎮';
+                document.getElementById('profileUsername').textContent = data.username;
+
+                const statsGrid = document.getElementById('profileStatsGrid');
+                statsGrid.innerHTML = `
+                    <div class="profile-stat-box">
+                        <div class="profile-stat-value">${data.total_games}</div>
+                        <div class="profile-stat-label">Games Played</div>
+                    </div>
+                    <div class="profile-stat-box">
+                        <div class="profile-stat-value">${Math.floor(data.average_cookies)}</div>
+                        <div class="profile-stat-label">Avg Cookies</div>
+                    </div>
+                    <div class="profile-stat-box">
+                        <div class="profile-stat-value">${data.best_score?.cookies ? Math.floor(data.best_score.cookies) : 0}</div>
+                        <div class="profile-stat-label">Best Score</div>
+                    </div>
+                    <div class="profile-stat-box">
+                        <div class="profile-stat-value">${data.total_achievements}</div>
+                        <div class="profile-stat-label">Total Achievements</div>
+                    </div>
+                `;
+
+                const gamesDiv = document.getElementById('profileGames');
+                gamesDiv.innerHTML = '<div class="profile-games-title">Recent Games</div>';
+                data.all_scores.slice(0, 5).forEach(score => {
+                    const game = document.createElement('div');
+                    game.className = 'profile-game-item';
+                    game.innerHTML = `
+                        <span>${Math.floor(score.cookies)} 🍪 - ${score.achievements} 🏆</span>
+                        <span>${new Date(score.timestamp).toLocaleDateString()}</span>
+                    `;
+                    gamesDiv.appendChild(game);
+                });
+
+                modal.classList.add('active');
+            } catch (err) {
+                showNotification('Player not found', 'error');
+            }
+        }
+
+        function closeProfile() {
+            document.getElementById('profileModal').classList.remove('active');
+        }
+
+        function showNotification(message, type = 'success') {
             const notif = document.createElement('div');
-            notif.className = 'notification';
+            notif.className = 'notification' + (type === 'error' ? ' error' : '');
             notif.textContent = message;
             document.body.appendChild(notif);
             setTimeout(() => notif.remove(), 3000);
-        };
+        }
 
-        const resetGame = () => {
-            if (confirm('Weet je zeker? Dit verwijdert alle voortgang!')) {
-                fetch('/api/reset', { method: 'POST' }).then(() => location.reload());
+        async function checkAuth() {
+            try {
+                const res = await fetch('/api/auth/me');
+                if (res.ok) {
+                    const data = await res.json();
+                    currentUsername = data.username;
+                    currentUserId = data.user_id;
+                    showGame();
+                }
+            } catch (err) {}
+        }
+
+        checkAuth();
+
+        window.onclick = (e) => {
+            if (e.target.id === 'profileModal') {
+                closeProfile();
             }
         };
-
-        // Event listeners
-        document.getElementById('cookieBtn').addEventListener('click', click);
-
-        // Load initial state and refresh data
-        loadState();
-        setInterval(loadState, 1000);
     </script>
 </body>
 </html>
